@@ -202,7 +202,7 @@ public class ActivityMain extends AppCompatActivity {
         });
         vEval.setText(mHeader.getEvaluatorname());
 
-
+        int test = 0;
         vGrade = (Spinner) findViewById(R.id.activity_grade_spinner);
         GradeAdapterGreen gradeAdapterGreen = new GradeAdapterGreen(this);
         vGrade.setAdapter(gradeAdapterGreen);

@@ -270,7 +270,6 @@ public class InterviewAdapter extends NTAdapter<InterviewAdapter.InterviewHolder
                         return true;
                     }
                 });
-
                 holder._competency_question_comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View v, boolean hasFocus) {
@@ -282,7 +281,7 @@ public class InterviewAdapter extends NTAdapter<InterviewAdapter.InterviewHolder
                         }
                     }
                 });
-
+//change
                 break;
         }
 
