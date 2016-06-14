@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\jfrometa\AndroidStudioProjects\ABT-master\stickylist\src\main\assets"/><source path="C:\Users\jfrometa\AndroidStudioProjects\ABT-master\stickylist\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="C:\Users\jfrometa\AndroidStudioProjects\ABT-master\stickylist\src\release\assets"/></dataSet></merger>

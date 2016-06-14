@@ -1,0 +1,188 @@
+<html>
+<head>
+<title>MenuActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(104,151,187); }
+.s3 { color: rgb(128,128,128); }
+.s4 { color: rgb(98,151,85); font-style: italic; }
+.s5 { color: rgb(98,151,85); font-weight: bold; font-style: italic; }
+.s6 { color: rgb(106,135,89); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MenuActivity.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">ntv.upgrade.NTSupervisor</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.Manifest</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.app.Fragment</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.pm.PackageManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.net.Uri</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.ActivityCompat</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.text.method.LinkMovementMethod</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.Menu</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.MenuItem</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.Window</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">ntv.upgrade.NTSupervisor.constants.AppConstants</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">public class </span><span class="s1">MenuActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity { 
+ 
+    </span><span class="s0">private static final int </span><span class="s1">PICKFILE_RESULT_CODE = </span><span class="s2">1</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s3">//dropbox stuff</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Button mChooserButton</span><span class="s0">;</span><span class="s1"> 
+ </span><span class="s3">//   private DbxChooser mChooser;</span><span class="s1"> 
+    CreateFragment fragment</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s3">// Storage Permissions</span><span class="s1"> 
+    </span><span class="s0">private static final int </span><span class="s1">REQUEST_EXTERNAL_STORAGE = </span><span class="s2">1</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private static </span><span class="s1">String[] PERMISSIONS_STORAGE = { 
+            Manifest.permission.READ_EXTERNAL_STORAGE</span><span class="s0">,</span><span class="s1"> 
+            Manifest.permission.WRITE_EXTERNAL_STORAGE 
+    }</span><span class="s0">;</span><span class="s1"> 
+ 
+    </span><span class="s4">/** 
+     * Checks if the app has permission to write to device storage 
+     * 
+     * If the app does not has permission then the user will be prompted to grant permissions 
+     * 
+     * </span><span class="s5">@param </span><span class="s4">activity 
+     */</span><span class="s1"> 
+    </span><span class="s0">public static void </span><span class="s1">verifyStoragePermissions(Activity activity) { 
+        </span><span class="s3">// Check if we have write permission</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">permission = ActivityCompat.checkSelfPermission(activity</span><span class="s0">, </span><span class="s1">Manifest.permission.WRITE_EXTERNAL_STORAGE)</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">if </span><span class="s1">(permission != PackageManager.PERMISSION_GRANTED) { 
+            </span><span class="s3">// We don't have permission so prompt the user</span><span class="s1"> 
+            ActivityCompat.requestPermissions( 
+                    activity</span><span class="s0">,</span><span class="s1"> 
+                    PERMISSIONS_STORAGE</span><span class="s0">,</span><span class="s1"> 
+                    REQUEST_EXTERNAL_STORAGE 
+            )</span><span class="s0">;</span><span class="s1"> 
+        } 
+    } 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+        verifyStoragePermissions(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onCreateOptionsMenu(Menu menu) { 
+        </span><span class="s3">// Inflate the menu; this adds items to the action bar if it is present.</span><span class="s1"> 
+        getMenuInflater().inflate(R.menu.menu_main</span><span class="s0">, </span><span class="s1">menu)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">return true;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public boolean </span><span class="s1">onOptionsItemSelected(MenuItem item) { 
+        </span><span class="s3">// Handle action bar item clicks here. The action bar will</span><span class="s1"> 
+        </span><span class="s3">// automatically handle clicks on the Home/Up button, so long</span><span class="s1"> 
+        </span><span class="s3">// as you specify a parent activity in AndroidManifest.xml.</span><span class="s1"> 
+        </span><span class="s0">int </span><span class="s1">id = item.getItemId()</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">switch </span><span class="s1">(id){ 
+        </span><span class="s3">/*    case R.id.add_client_menu_option: 
+              *//*  Intent intent = new Intent(this, AddClientActivity.class); 
+                //EditText editText = (EditText) findViewById(R.id.edit_message); 
+                //String message = editText.getText().toString(); 
+                //intent.putExtra(EXTRA_MESSAGE, message); 
+                startActivity(intent);*//* 
+                break;*/</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s1">R.id.action_settings: 
+                Toast toast = Toast.makeText(</span><span class="s0">this, </span><span class="s6">&quot;Wheeee!&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT)</span><span class="s0">; </span><span class="s1">toast.show()</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">break;</span><span class="s1"> 
+            </span><span class="s0">default</span><span class="s1">: 
+ 
+        } 
+ 
+ 
+ 
+        </span><span class="s0">return super</span><span class="s1">.onOptionsItemSelected(item)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+ 
+ 
+ 
+    </span><span class="s0">private void </span><span class="s1">showLink(</span><span class="s0">int </span><span class="s1">id</span><span class="s0">, </span><span class="s1">Uri uri) { 
+        TextView v = (TextView) findViewById(id)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(uri == </span><span class="s0">null</span><span class="s1">) { 
+            v.setText(</span><span class="s6">&quot;&quot;</span><span class="s0">, </span><span class="s1">TextView.BufferType.NORMAL)</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">return;</span><span class="s1"> 
+        } 
+        v.setText(uri.toString()</span><span class="s0">, </span><span class="s1">TextView.BufferType.NORMAL)</span><span class="s0">;</span><span class="s1"> 
+        v.setMovementMethod(LinkMovementMethod.getInstance())</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">loadFileList(View view) { 
+        Intent intent = </span><span class="s0">new </span><span class="s1">Intent(Intent.ACTION_GET_CONTENT)</span><span class="s0">;</span><span class="s1"> 
+        intent.setType(</span><span class="s6">&quot;file/*.ntv&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        startActivityForResult(intent</span><span class="s0">, </span><span class="s1">PICKFILE_RESULT_CODE)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onActivityResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, int </span><span class="s1">resultCode</span><span class="s0">, </span><span class="s1">Intent data) { 
+        </span><span class="s3">// TODO Auto-generated method stub</span><span class="s1"> 
+        </span><span class="s0">switch</span><span class="s1">(requestCode){ 
+            </span><span class="s0">case </span><span class="s1">PICKFILE_RESULT_CODE: 
+                </span><span class="s0">if</span><span class="s1">(resultCode==RESULT_OK){ 
+                    String FilePath = data.getData().getPath()</span><span class="s0">;</span><span class="s1"> 
+                    AppConstants.SELECTED_FILE = FilePath</span><span class="s0">;</span><span class="s1"> 
+ 
+                    Intent intent = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this, </span><span class="s1">ActivityReport.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                    startActivity(intent)</span><span class="s0">;</span><span class="s1"> 
+ 
+                    Toast.makeText(</span><span class="s0">this, </span><span class="s6">&quot;Cargando &quot; </span><span class="s1">+ AppConstants.SELECTED_FILE</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT) 
+                            .show()</span><span class="s0">;</span><span class="s1"> 
+                } 
+                </span><span class="s0">break;</span><span class="s1"> 
+ 
+        } 
+    } 
+ 
+    </span><span class="s4">/** 
+     * A placeholder fragment containing a simple view. 
+     */</span><span class="s1"> 
+    </span><span class="s0">public static class </span><span class="s1">PlaceholderFragment </span><span class="s0">extends </span><span class="s1">Fragment { 
+ 
+        </span><span class="s0">public </span><span class="s1">PlaceholderFragment() { 
+        } 
+ 
+        @Override 
+        </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater</span><span class="s0">, final </span><span class="s1">ViewGroup container</span><span class="s0">,</span><span class="s1"> 
+                                 Bundle savedInstanceState) { 
+            </span><span class="s0">final </span><span class="s1">View rootView = inflater.inflate(R.layout.activity_main</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s3">//</span><span class="s1"> 
+ 
+ 
+            </span><span class="s0">return </span><span class="s1">rootView</span><span class="s0">;</span><span class="s1"> 
+        } 
+ 
+    } 
+} 
+</span></pre>
+</body>
+</html>
