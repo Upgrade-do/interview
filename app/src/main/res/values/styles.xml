@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+       <!-- <item name="android:actionMenuTextColor">@color/colorPrimaryDark</item>-->
+        <item name="colorControlNormal">@color/colorAccent_2</item>
+        <!-- color when switch is at initial state-->
+        <item name="colorSwitchThumbNormal">@color/colorAccent_2</item>
+        <!-- Inactive track color(30% transparency) -->
+        <item name="android:colorForeground">@color/colorAccent_2</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <style name="TextInputLayoutColors" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+
+    </style>
+
+    <style name="TextInputLayoutGrayColors" parent="@android:style/TextAppearance">
+
+        <item name="android:textColor">@color/grayText</item>
+        <item name="colorControlNormal">@color/grayText</item>
+    </style>
+
+    <style name="ColorSwitchStyle" >
+        <item name="colorControlNormal">@color/colorAccent_2</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+       <!-- color when switch is at initial state-->
+        <item name="colorSwitchThumbNormal">@color/colorAccent_2</item>
+        <!-- Inactive track color(30% transparency) -->
+        <item name="android:colorForeground">@color/colorAccent_2</item>
+    </style>
+
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">nInterview</string>
+    <string name="action_settings">Configuración</string>
+    <string name="title_activity_settings">Settings</string>
+
+
+</resources>
