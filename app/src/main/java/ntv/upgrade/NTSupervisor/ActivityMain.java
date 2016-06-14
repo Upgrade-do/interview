@@ -185,6 +185,7 @@ public class ActivityMain extends AppCompatActivity {
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 return true;
+
             }
         });
         vEval.setOnFocusChangeListener(new View.OnFocusChangeListener() {
